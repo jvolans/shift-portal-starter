@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="cs"><head>
+  <meta charset="utf-8"><title>Admin – Směny</title>
+  <link rel="stylesheet" href="/style.css">
+</head><body>
+  <div class="topbar">
+    <strong>Směny</strong>
+    <nav>
+      <a href="/me/shifts">Moje směny</a>
+      <a href="/profile">Profil</a>
+      <a href="/admin">Admin</a>
+    </nav>
+    <div class="spacer"></div>
+    <form method="post" action="/logout"><button class="btn-link">Odhlásit</button></form>
+  </div>
+
+  <div class="container">
+    <h1>Admin</h1>
+    <% if (message) { %><div class="notice"><%= message %></div><% } %>
+    <% if (error)   { %><div class="alert"><%= error %></div><% } %>
+
+    <h2>Přidat uživatele</h2>
+    <form method="post" action="/admin/add-user" class="card">
+      <label>Osobní číslo</label><input name="personal_number" required>
+      <label>Jméno a příjmení</label><input name="full_name" required>
+      <label>Telefon</label><input name="phone">
+      <label>E-mail</label><input name="email">
+      <label>Heslo (prázdné = stejné jako osobní číslo)</label><input type="password" name="password">
+      <button type="submit">Uložit</button>
+    </form>
+
+    <h2>Import směn (CSV)</h2>
+    <form method="post" action="/admin/import-shifts" enctype="multipart/form-data" class="card">
+      <p>CSV hlavičky: <code>PersonalNumber,Date,Start,End,Site,Role,Notes</code></p>
+      <input type="file" name="csvfile" accept=".csv" required>
+      <button type="submit">Nahrát</button>
+    </form>
+
+    <h2>Uživatelé</h2>
+    <table>
+      <thead><tr><th>Osobní číslo</th><th>Jméno</th><th>Telefon</th><th>E-mail</th></tr></thead>
+      <tbody>
+      <% users.forEach(u => { %>
+        <tr><td><%= u.personal_number %></td><td><%= u.full_name %></td><td><%= u.phone || '' %></td><td><%= u.email || '' %></td></tr>
+      <% }) %>
+      </tbody>
+    </table>
+
+    <p><a href="/me/shifts">← Zpět na moje směny</a></p>
+  </div>
+</body></html>

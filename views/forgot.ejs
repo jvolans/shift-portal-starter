@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="cs"><head>
+  <meta charset="utf-8"><title>Zapomenuté heslo</title>
+  <link rel="stylesheet" href="/style.css">
+</head><body>
+  <div class="topbar">
+    <strong>Směny</strong>
+    <div class="spacer"></div>
+    <a href="/login">← Zpět na přihlášení</a>
+  </div>
+
+  <div class="container">
+    <h1>Zapomenuté heslo</h1>
+    <% if (message) { %><div class="notice"><%= message %></div><% } %>
+    <% if (error)   { %><div class="alert"><%= error %></div><% } %>
+
+    <form method="post" class="card">
+      <label>Osobní číslo (nebo e-mail)</label>
+      <input name="personal_number" placeholder="49563">
+      <input name="email" placeholder="jan@example.com">
+      <button type="submit">Poslat odkaz pro nastavení hesla</button>
+    </form>
+  </div>
+</body></html>
