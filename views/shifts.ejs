@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="cs"><head>
+  <meta charset="utf-8">
+  <title>Moje směny</title>
+  <link rel="stylesheet" href="/style.css">
+</head><body>
+  <div class="topbar">
+    <div>👷 <strong><%= user.full_name %></strong> — <%= user.personal_number %></div>
+    <div class="actions">
+      <a href="/me/shifts.ics">📅 iCal</a>
+      <form method="post" action="/logout"><button type="submit">Odhlásit</button></form>
+    </div>
+  </div>
+  <div class="container">
+    <h1>Moje směny</h1>
+    <% if (!shifts.length) { %>
+      <p>Nemáte žádné směny.</p>
+    <% } else { %>
+      <table>
+        <thead><tr><th>Datum</th><th>Od</th><th>Do</th><th>Provoz</th><th>Role</th><th>Poznámka</th></tr></thead>
+        <tbody>
+          <% shifts.forEach(s => { %>
+            <tr>
+              <td><%= s.date %></td>
+              <td><%= s.start_time %></td>
+              <td><%= s.end_time %></td>
+              <td><%= s.site || '' %></td>
+              <td><%= s.role || '' %></td>
+              <td><%= s.notes || '' %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } %>
+    <hr>
+    <p><a href="/admin">Admin (import)</a></p>
+  </div>
+</body></html>
