@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg bg-white sticky-top">
+  <div class="container container-narrow">
+    <a class="navbar-brand fw-semibold" href="/me/shifts">Směny</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"
+      aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <% if (user) { %>
+          <li class="nav-item"><a class="nav-link" href="/me/shifts">Moje směny</a></li>
+          <li class="nav-item"><a class="nav-link" href="/profile">Profil</a></li>
+          <% if (user.is_admin) { %>
+            <li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li>
+          <% } %>
+        <% } else { %>
+          <li class="nav-item"><a class="nav-link" href="/login">Přihlášení</a></li>
+        <% } %>
+      </ul>
+
+      <% if (user) { %>
+        <form method="post" action="/logout" class="mb-0">
+          <button class="btn btn-outline-secondary btn-sm">Odhlásit</button>
+        </form>
+      <% } else { %>
+        <a href="/privacy" class="btn btn-outline-secondary btn-sm">Zásady</a>
+      <% } %>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,7 @@
+/* jemný skin nad Bootstrapem */
+body { background: #f6f7f9; }
+.container-narrow { max-width: 960px; }
+.navbar { box-shadow: 0 4px 18px rgba(0,0,0,.06); }
+.card { border-radius: 14px; }
+.table thead th { white-space: nowrap; }
+.form-grid { display:grid; gap:12px; }

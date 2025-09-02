@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="cs"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Moje směny</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head><body>
+  <%- include('partials/topbar') %>
+  <div class="container container-narrow py-4">
+    <div class="card p-3">
+      <h1 class="h4 mb-3">Moje směny</h1>
+      <% if (!shifts.length) { %>
+        <p class="text-muted mb-0">Nemáte žádné směny.</p>
+      <% } else { %>
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>Datum</th><th>Od</th><th>Do</th><th>Work Center</th><th>Poznámka</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% shifts.forEach(s => { %>
+                <tr>
+                  <td><%= (s.date?.toISOString ? s.date.toISOString().slice(0,10) : s.date) %></td>
+                  <td><%= s.start_time %></td>
+                  <td><%= s.end_time %></td>
+                  <td><%= s.site || '' %></td>
+                  <td><%= s.notes || '' %></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      <% } %>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body></html>
